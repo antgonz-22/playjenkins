@@ -1,12 +1,11 @@
 pipeline {
-
-  agent { label 'kubepod' }
-
+  agent {
+    label 'kubepod'
+  }
   stages {
-
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/justmeandopensource/playjenkins.git', branch:'test-deploy-stage'
+        git(url: 'https://github.com/antgonz-22/playjenkins.git', branch: 'test-deploy-stage')
       }
     }
 
@@ -15,9 +14,9 @@ pipeline {
         script {
           kubernetesDeploy(configs: "nginx.yaml", kubeconfigId: "mykubeconfig")
         }
+
       }
     }
 
   }
-
 }
